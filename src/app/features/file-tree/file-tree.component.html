@@ -1,10 +1,15 @@
-<ng-container *ngIf="node$ | async as node">
+<ng-container *ngIf="node$ | async as node; else children">
   <file-node [node]="node"></file-node>
+  <ng-container *ngIf="node.isOpen">
+    <ng-container *ngTemplateOutlet="children"></ng-container>
+  </ng-container>
 </ng-container>
-<div [style]="paddingLeftStyle" *ngIf="children$ | async as children">
-  <file-tree
-    *ngFor="let childrenNode of children"
-    [parentId]="childrenNode.id"
-    [paddingLeft]="paddingLeft + paddingStep"
-  ></file-tree>
-</div>
+<ng-template #children>
+  <div [style]="paddingLeftStyle" *ngIf="children$ | async as children">
+    <file-tree
+      *ngFor="let childrenNode of children"
+      [parentId]="childrenNode.id"
+      [paddingLeft]="paddingLeft + paddingStep"
+    ></file-tree>
+  </div>
+</ng-template>

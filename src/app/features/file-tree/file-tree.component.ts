@@ -15,8 +15,8 @@ export class FileTreeComponent implements OnInit {
   @Input() parentId!: TreeNode['id'] | undefined;
   @Input() paddingLeft: number = 0;
 
-  node$: Observable<PlainNode | undefined> = of(undefined);
-  children$: Observable<PlainNode[] | undefined> = of(undefined);
+  node$: Observable<PlainNode | undefined> = of();
+  children$: Observable<PlainNode[]> = of([]);
   paddingStep: number = 16;
 
   constructor(private fileHierarchyService: FileHierarchyService) {}

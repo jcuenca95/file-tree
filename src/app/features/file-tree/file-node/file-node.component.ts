@@ -28,7 +28,11 @@ export class FileNodeComponent implements OnInit {
     return this.node.type === 'folder' ? 'folder' : 'description';
   }
 
-  selectNode() {
-    this.fileHierarchyService.selectNode(this.node.id);
+  handleOnNodeClick() {
+    if (this.node.type === 'file') {
+      this.fileHierarchyService.selectFile(this.node.id);
+    } else {
+      this.fileHierarchyService.toggleFolder(this.node.id);
+    }
   }
 }

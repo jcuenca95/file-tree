@@ -1,4 +1,4 @@
-<p [class]="'node ' + (selectedClass$ | async)">
+<p [class]="'node ' + (selectedClass$ | async)" (click)="handleOnNodeClick()">
   <mat-icon>{{ icon }}</mat-icon
   >{{ node.name }}
 </p>

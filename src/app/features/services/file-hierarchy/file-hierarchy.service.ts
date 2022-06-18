@@ -145,7 +145,18 @@ export class FileHierarchyService {
     );
   }
 
-  selectNode(id: TreeNode['id']) {
+  selectFile(id: TreeNode['id']) {
     this._selectedNode$.next(id);
+  }
+
+  toggleFolder(id: TreeNode['id']) {
+    const hierarchy = this._hierarchy$.value;
+    const index = hierarchy.findIndex(
+      (node) => node.id === id && node.type === 'folder'
+    );
+    if (index >= 0) {
+      hierarchy[index].isOpen = !hierarchy[index].isOpen;
+      this._hierarchy$.next(hierarchy);
+    }
   }
 }
