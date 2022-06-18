@@ -3,8 +3,10 @@
     align-items: end;
     cursor: pointer;
     font-size: 20px;
+    padding: 4px
 }
 
 .node.selected {
-    background-color: aqua;
+    background-color: #673ab710;
+    border-radius: 4px;
 }
