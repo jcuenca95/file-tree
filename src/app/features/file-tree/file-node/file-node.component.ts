@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
+import { getIconFromExt } from 'src/app/core/helpers/file-icons.helper';
 import {
   FileHierarchyService,
   PlainNode,
@@ -25,7 +26,11 @@ export class FileNodeComponent implements OnInit {
   }
 
   get icon() {
-    return this.node.type === 'folder' ? 'folder' : 'description';
+    if (this.node.type === 'folder') {
+      return 'folder';
+    }
+    const splittedFilename = this.node.name.split('.');
+    return getIconFromExt(splittedFilename[splittedFilename.length - 1]);
   }
 
   handleOnNodeClick() {
