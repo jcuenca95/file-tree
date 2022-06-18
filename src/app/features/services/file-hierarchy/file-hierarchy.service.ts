@@ -79,6 +79,7 @@ const mockHierarchy: TreeNode[] = [
 
 export interface PlainNode extends Omit<TreeNode, 'children'> {
   parentId: TreeNode['id'] | undefined;
+  isOpen: boolean;
 }
 
 @Injectable({
@@ -86,6 +87,9 @@ export interface PlainNode extends Omit<TreeNode, 'children'> {
 })
 export class FileHierarchyService {
   private _hierarchy$ = new BehaviorSubject<PlainNode[]>([]);
+  private _selectedNode$ = new BehaviorSubject<TreeNode['id'] | undefined>(
+    undefined
+  );
 
   constructor() {
     this.loadTree(mockHierarchy);
@@ -93,6 +97,10 @@ export class FileHierarchyService {
 
   get hierarchy$(): Observable<PlainNode[]> {
     return this._hierarchy$.asObservable();
+  }
+
+  get selectedNodes$(): Observable<TreeNode['id'] | undefined> {
+    return this._selectedNode$.asObservable();
   }
 
   loadTree(tree: TreeNode[]): void {
@@ -108,6 +116,7 @@ export class FileHierarchyService {
     const plainNodes = treeNode.map<PlainNode>(({ children, ...restNode }) => ({
       ...restNode,
       parentId,
+      isOpen: false,
     }));
     treeMap.push(...plainNodes);
 
@@ -134,5 +143,9 @@ export class FileHierarchyService {
         hierarchy.filter((element) => element.parentId === parentId)
       )
     );
+  }
+
+  selectNode(id: TreeNode['id']) {
+    this._selectedNode$.next(id);
   }
 }
