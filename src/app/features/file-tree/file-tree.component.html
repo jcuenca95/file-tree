@@ -1,1 +1,10 @@
-<p>file-tree works!</p>
+<ng-container *ngIf="node$ | async as node">
+  <file-node [node]="node"></file-node>
+</ng-container>
+<div [style]="paddingLeftStyle" *ngIf="children$ | async as children">
+  <file-tree
+    *ngFor="let childrenNode of children"
+    [parentId]="childrenNode.id"
+    [paddingLeft]="paddingLeft + paddingStep"
+  ></file-tree>
+</div>

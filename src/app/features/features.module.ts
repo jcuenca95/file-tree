@@ -4,9 +4,10 @@ import { FileTreeComponent } from './file-tree/file-tree.component';
 import { FilePreviewComponent } from './file-preview/file-preview.component';
 import { MaterialModule } from '../material/material.module';
 import { FileHierarchyService } from './services/file-hierarchy/file-hierarchy.service';
+import { FileNodeComponent } from './file-tree/file-node/file-node.component';
 
 @NgModule({
-  declarations: [FileTreeComponent, FilePreviewComponent],
+  declarations: [FileTreeComponent, FilePreviewComponent, FileNodeComponent],
   imports: [CommonModule, MaterialModule],
   exports: [FileTreeComponent, FilePreviewComponent],
   providers: [FileHierarchyService],

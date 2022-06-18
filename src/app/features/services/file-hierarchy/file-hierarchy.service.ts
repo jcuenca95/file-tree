@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { TreeNode } from '../../../core/interfaces/tree-node.interface';
 
 const mockHierarchy: TreeNode[] = [
@@ -77,8 +77,8 @@ const mockHierarchy: TreeNode[] = [
   },
 ];
 
-interface PlainNode extends Omit<TreeNode, 'children'> {
-  parentId: string | undefined;
+export interface PlainNode extends Omit<TreeNode, 'children'> {
+  parentId: TreeNode['id'] | undefined;
 }
 
 @Injectable({
@@ -121,15 +121,18 @@ export class FileHierarchyService {
   }
 
   getElement(
-    id: string
-  ): Observable<{ element: PlainNode | undefined; children: PlainNode[] }> {
+    id: TreeNode['id'] | undefined
+  ): Observable<PlainNode | undefined> {
     return this._hierarchy$.pipe(
-      map((hierarchy) => {
-        return {
-          children: hierarchy.filter((element) => element.parentId === id),
-          element: hierarchy.find((element) => element.id === id),
-        };
-      })
+      map((hierarchy) => hierarchy.find((element) => element.id === id))
+    );
+  }
+
+  getChildren(parentId: TreeNode['id'] | undefined): Observable<PlainNode[]> {
+    return this._hierarchy$.pipe(
+      map((hierarchy) =>
+        hierarchy.filter((element) => element.parentId === parentId)
+      )
     );
   }
 }
