@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { TreeNode } from 'src/app/core/interfaces/tree-node.interface';
 import {
   PlainNode,
@@ -26,10 +26,7 @@ export class FileTreeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.node$ = this.fileHierarchyService
-      .getElement(this.parentId)
-      .pipe(tap(console.log));
-
+    this.node$ = this.fileHierarchyService.getElement(this.parentId);
     this.children$ = this.fileHierarchyService.getChildren(this.parentId);
   }
 }
