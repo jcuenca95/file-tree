@@ -1,5 +1,6 @@
 {
     "conventionalCommits.scopes": [
-        "file-tree"
+        "file-tree",
+        "file-loader"
     ]
 }
