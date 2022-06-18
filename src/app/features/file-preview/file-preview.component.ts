@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { FileHierarchyService } from '../services/file-hierarchy/file-hierarchy.service';
 
 @Component({
   selector: 'file-preview',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./file-preview.component.scss'],
 })
 export class FilePreviewComponent implements OnInit {
-  constructor() {}
+  @ViewChild('viewer') private viewerContainer!: ViewContainerRef;
+  file$ = this.fileHierachyService.selectedFileRef$;
+  constructor(private fileHierachyService: FileHierarchyService) {}
 
   ngOnInit(): void {}
 }

@@ -16,7 +16,7 @@ export class FileHierarchyService {
   private _selectedFile$ = new BehaviorSubject<TreeNode['id'] | undefined>(
     undefined
   );
-  private loadedFiles!: File[];
+  private loadedFiles: File[] = [];
 
   constructor() {}
 
@@ -26,6 +26,17 @@ export class FileHierarchyService {
 
   get selectedFile$(): Observable<TreeNode['id'] | undefined> {
     return this._selectedFile$.asObservable();
+  }
+
+  get selectedFileRef$(): Observable<File | undefined> {
+    return this.selectedFile$.pipe(
+      map((fileId) => {
+        const nodeRef = this._hierarchy$.value.find(
+          (node) => node.id === fileId
+        );
+        return this.loadedFiles.find((file) => file.name === nodeRef?.name);
+      })
+    );
   }
 
   createTreeFromPath(

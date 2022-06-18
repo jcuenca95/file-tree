@@ -1,6 +1,7 @@
 {
     "conventionalCommits.scopes": [
         "file-tree",
-        "file-loader"
+        "file-loader",
+        "file-preview"
     ]
 }
