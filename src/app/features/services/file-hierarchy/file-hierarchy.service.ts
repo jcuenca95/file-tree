@@ -1,81 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
+import { v4 } from 'uuid';
 import { TreeNode } from '../../../core/interfaces/tree-node.interface';
-
-const mockHierarchy: TreeNode[] = [
-  {
-    id: '1',
-    name: 'Folder 1',
-    type: 'folder',
-    children: [
-      {
-        id: '2',
-        name: 'Subfolder 1',
-        type: 'folder',
-        children: [
-          {
-            id: '3',
-            name: 'File 1',
-            type: 'file',
-          },
-          {
-            id: '4',
-            name: 'File 1',
-            type: 'file',
-          },
-        ],
-      },
-      {
-        id: '5',
-        name: 'Subfolder 2',
-        type: 'folder',
-        children: [
-          {
-            id: '6',
-            name: 'File 2',
-            type: 'file',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: '7',
-    name: 'Folder 2',
-    type: 'folder',
-    children: [
-      {
-        id: '8',
-        name: 'Subfolder 1',
-        type: 'folder',
-        children: [
-          {
-            id: '9',
-            name: 'File 1',
-            type: 'file',
-          },
-          {
-            id: '10',
-            name: 'File 1',
-            type: 'file',
-          },
-        ],
-      },
-      {
-        id: '11',
-        name: 'Subfolder 2',
-        type: 'folder',
-        children: [
-          {
-            id: '12',
-            name: 'File 2',
-            type: 'file',
-          },
-        ],
-      },
-    ],
-  },
-];
 
 export interface PlainNode extends Omit<TreeNode, 'children'> {
   parentId: TreeNode['id'] | undefined;
@@ -90,10 +16,9 @@ export class FileHierarchyService {
   private _selectedFile$ = new BehaviorSubject<TreeNode['id'] | undefined>(
     undefined
   );
+  private loadedFiles!: File[];
 
-  constructor() {
-    this.loadTree(mockHierarchy);
-  }
+  constructor() {}
 
   get hierarchy$(): Observable<PlainNode[]> {
     return this._hierarchy$.asObservable();
@@ -103,30 +28,48 @@ export class FileHierarchyService {
     return this._selectedFile$.asObservable();
   }
 
-  loadTree(tree: TreeNode[]): void {
-    const nextHierarchy = this.createNodes(tree);
-    this._hierarchy$.next(nextHierarchy);
+  createTreeFromPath(
+    path: string[],
+    hierarchy: PlainNode[] = [],
+    parentId: TreeNode['id'] | undefined = undefined
+  ): PlainNode[] {
+    if (path.length === 0) {
+      return hierarchy;
+    }
+    const nodeName = path[0];
+    const fileRef = this.loadedFiles.find((file) => file.name === nodeName);
+    const nodeRef = hierarchy.find((node) => node.name === nodeName);
+    const id = nodeRef ? nodeRef.id : v4();
+    if (!nodeRef) {
+      hierarchy.push({
+        isOpen: false,
+        name: nodeName,
+        type: fileRef ? 'file' : 'folder',
+        parentId: parentId,
+        id,
+      });
+    }
+    path.shift();
+    this.createTreeFromPath(path, hierarchy, id);
+    return hierarchy;
   }
 
-  private createNodes(
-    treeNode: TreeNode[],
-    treeMap: PlainNode[] = [],
-    parentId: string | undefined = undefined
-  ): PlainNode[] {
-    const plainNodes = treeNode.map<PlainNode>(({ children, ...restNode }) => ({
-      ...restNode,
-      parentId,
-      isOpen: false,
-    }));
-    treeMap.push(...plainNodes);
+  loadTree(files: File[]): void {
+    this.loadedFiles = files;
+    const hierarchy: PlainNode[] = [];
+    const paths = files.map(({ webkitRelativePath }) =>
+      webkitRelativePath.split('/')
+    );
+    paths.forEach((path) => this.createTreeFromPath(path, hierarchy));
 
-    treeNode.forEach((node) => {
-      if (node.children) {
-        this.createNodes(node.children, treeMap, node.id);
-      }
-    });
-
-    return treeMap;
+    this._hierarchy$.next(
+      hierarchy.sort((node1, node2) => {
+        if (node1.type === node2.type) return 0;
+        if (node1.type === 'folder') return -1;
+        if (node2.type === 'folder') return 1;
+        return 0;
+      })
+    );
   }
 
   getElement(
