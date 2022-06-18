@@ -87,7 +87,7 @@ export interface PlainNode extends Omit<TreeNode, 'children'> {
 })
 export class FileHierarchyService {
   private _hierarchy$ = new BehaviorSubject<PlainNode[]>([]);
-  private _selectedNode$ = new BehaviorSubject<TreeNode['id'] | undefined>(
+  private _selectedFile$ = new BehaviorSubject<TreeNode['id'] | undefined>(
     undefined
   );
 
@@ -99,8 +99,8 @@ export class FileHierarchyService {
     return this._hierarchy$.asObservable();
   }
 
-  get selectedNodes$(): Observable<TreeNode['id'] | undefined> {
-    return this._selectedNode$.asObservable();
+  get selectedFile$(): Observable<TreeNode['id'] | undefined> {
+    return this._selectedFile$.asObservable();
   }
 
   loadTree(tree: TreeNode[]): void {
@@ -146,7 +146,8 @@ export class FileHierarchyService {
   }
 
   selectFile(id: TreeNode['id']) {
-    this._selectedNode$.next(id);
+    const selectedFile = this._selectedFile$.value;
+    this._selectedFile$.next(id === selectedFile ? undefined : id);
   }
 
   toggleFolder(id: TreeNode['id']) {

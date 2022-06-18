@@ -17,7 +17,7 @@ export class FileNodeComponent implements OnInit {
   constructor(private fileHierarchyService: FileHierarchyService) {}
 
   ngOnInit(): void {
-    this.selectedClass$ = this.fileHierarchyService.selectedNodes$.pipe(
+    this.selectedClass$ = this.fileHierarchyService.selectedFile$.pipe(
       map((selectedNodeId) =>
         selectedNodeId === this.node.id ? 'selected' : ''
       )
