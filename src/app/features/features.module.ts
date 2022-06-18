@@ -7,11 +7,32 @@ import { FileHierarchyService } from './services/file-hierarchy/file-hierarchy.s
 import { FileNodeComponent } from './file-tree/file-node/file-node.component';
 import { ImageViewerComponent } from './file-preview/viewers/image-viewer/image-viewer.component';
 import { VideoViewerComponent } from './file-preview/viewers/video-viewer/video-viewer.component';
+import { AudioViewerComponent } from './file-preview/viewers/audio-viewer/audio-viewer.component';
+import { ViewerComponentMap } from '../core/injection-tokens';
 
 @NgModule({
-  declarations: [FileTreeComponent, FilePreviewComponent, FileNodeComponent, ImageViewerComponent, VideoViewerComponent],
+  declarations: [
+    FileTreeComponent,
+    FilePreviewComponent,
+    FileNodeComponent,
+    ImageViewerComponent,
+    VideoViewerComponent,
+    AudioViewerComponent,
+  ],
   imports: [CommonModule, MaterialModule],
   exports: [FileTreeComponent, FilePreviewComponent],
-  providers: [FileHierarchyService],
+  providers: [
+    FileHierarchyService,
+    {
+      provide: ViewerComponentMap,
+      useValue: {
+        jpg: ImageViewerComponent,
+        jpeg: ImageViewerComponent,
+        png: ImageViewerComponent,
+        mp3: AudioViewerComponent,
+        mp4: VideoViewerComponent,
+      },
+    },
+  ],
 })
 export class FeaturesModule {}

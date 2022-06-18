@@ -1,5 +1,4 @@
-<ng-container *ngIf="file$ | async as file; else noFile">
+<ng-container *ngIf="file; else noFile">
   <ng-container #viewer></ng-container>
-  {{ file.name }}
 </ng-container>
 <ng-template #noFile> No file selected </ng-template>
