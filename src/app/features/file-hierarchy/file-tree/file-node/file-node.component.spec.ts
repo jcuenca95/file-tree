@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FileHierarchyService } from '../../services/file-hierarchy/file-hierarchy.service';
@@ -11,7 +12,8 @@ describe('FileNodeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [FileNodeComponent],
-      providers: [FileHierarchyService]
+      providers: [FileHierarchyService],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
 

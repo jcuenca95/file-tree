@@ -1,5 +1,5 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { FileHierarchyService, PlainNode } from '../services/file-hierarchy/file-hierarchy.service';
 
@@ -23,7 +23,8 @@ describe('FileTreeComponent', () => {
       providers: [{
         provide: FileHierarchyService,
         useClass: MockedFileHierarchyService
-      }]
+      }],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
 

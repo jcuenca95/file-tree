@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ViewerComponentMap } from '../../../core/injection-tokens';
 import { FileHierarchyService } from '../services/file-hierarchy/file-hierarchy.service';
@@ -12,7 +13,7 @@ describe('FilePreviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FilePreviewComponent ],
+      declarations: [FilePreviewComponent],
       providers: [
         {
           provide: ViewerComponentMap,
@@ -23,8 +24,9 @@ describe('FilePreviewComponent', () => {
         FileHierarchyService,
         ViewerComponentFactoryService,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(FilePreviewComponent);
     component = fixture.componentInstance;
