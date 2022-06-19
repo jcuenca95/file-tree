@@ -35,17 +35,19 @@ export class FilePreviewComponent implements AfterContentInit, OnDestroy {
 
   ngAfterContentInit(): void {
     this.file$.subscribe((file) => {
-      this.file = file;
-      this.viewerContainer.clear();
-      if (file) {
-        const fileNameSplitted = file.name.split('.');
-        const fileExt = fileNameSplitted[fileNameSplitted.length - 1];
-        const component = this.viewerComponentFactory.getComponent(fileExt);
-        const viewerComponent =
-          this.viewerContainer.createComponent<ViewerComponent>(
-            component as any
-          );
-        viewerComponent.instance.file = file;
+      if (file && this.viewerContainer) {
+        this.file = file;
+        this.viewerContainer.clear();
+        if (file) {
+          const fileNameSplitted = file.name.split('.');
+          const fileExt = fileNameSplitted[fileNameSplitted.length - 1];
+          const component = this.viewerComponentFactory.getComponent(fileExt);
+          const viewerComponent =
+            this.viewerContainer.createComponent<ViewerComponent>(
+              component as any
+            );
+          viewerComponent.instance.file = file;
+        }
       }
     });
   }

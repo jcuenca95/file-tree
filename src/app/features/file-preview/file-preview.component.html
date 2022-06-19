@@ -1,4 +1,2 @@
-<ng-container *ngIf="file; else noFile">
-  <ng-container #viewer></ng-container>
-</ng-container>
-<ng-template #noFile> No file selected </ng-template>
+<ng-container #viewer></ng-container>
+<ng-template *ngIf="!file"> No file selected </ng-template>
