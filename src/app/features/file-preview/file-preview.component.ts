@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   AfterViewInit,
   Component,
   OnDestroy,
@@ -16,7 +17,7 @@ import { ViewerComponentFactoryService } from './viewers/services/viewer-compone
   templateUrl: './file-preview.component.html',
   styleUrls: ['./file-preview.component.scss'],
 })
-export class FilePreviewComponent implements AfterViewInit, OnDestroy {
+export class FilePreviewComponent implements AfterContentInit, OnDestroy {
   @ViewChild('viewer', { read: ViewContainerRef })
   private viewerContainer!: ViewContainerRef;
   file!: File | undefined;
@@ -32,7 +33,7 @@ export class FilePreviewComponent implements AfterViewInit, OnDestroy {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
-  ngAfterViewInit(): void {
+  ngAfterContentInit(): void {
     this.file$.subscribe((file) => {
       this.file = file;
       this.viewerContainer.clear();

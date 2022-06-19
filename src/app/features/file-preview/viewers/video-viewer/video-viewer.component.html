@@ -1,1 +1,6 @@
-<p>video-viewer works!</p>
+<ng-container *ngIf="file">
+  <p>{{ file.name }}</p>
+  <video *ngIf="fileData$ | async as fileData" #videoPlayer controls>
+    <source [src]="fileData" />
+  </video>
+</ng-container>

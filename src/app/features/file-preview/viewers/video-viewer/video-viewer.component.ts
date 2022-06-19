@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ViewerComponent } from '../../../../core/interfaces/viewer-component.interface';
 
 @Component({
@@ -6,6 +6,14 @@ import { ViewerComponent } from '../../../../core/interfaces/viewer-component.in
   templateUrl: './video-viewer.component.html',
   styleUrls: ['./video-viewer.component.scss'],
 })
-export class VideoViewerComponent extends ViewerComponent implements OnInit {
-  ngOnInit(): void {}
+export class VideoViewerComponent
+  extends ViewerComponent
+  implements AfterViewInit
+{
+  @ViewChild('videoPlayer', { read: ElementRef })
+  private videoPlayer!: ElementRef<HTMLVideoElement>;
+
+  ngAfterViewInit(): void {
+    this.videoPlayer.nativeElement.load();
+  }
 }
