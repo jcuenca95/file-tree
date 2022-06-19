@@ -1,6 +1,7 @@
-import { Inject, Injectable, Type } from '@angular/core';
-import { ViewerComponent } from '../../../interfaces/viewer-component.interface';
+import { Inject, Injectable } from '@angular/core';
+import { ViewerComponent } from '../../../classes/viewer-component.class';
 import { ViewerComponentMap } from '../../../../../core/injection-tokens';
+import { DefaultViewerComponent } from '../default-viewer/default-viewer.component';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,6 @@ export class ViewerComponentFactoryService {
   ) {}
 
   getComponent(fileExt: string): ViewerComponent {
-    return this.componentMap[fileExt];
+    return this.componentMap[fileExt] || DefaultViewerComponent;
   }
 }

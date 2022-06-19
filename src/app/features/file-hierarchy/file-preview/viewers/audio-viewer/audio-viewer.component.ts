@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
-import { ViewerComponent } from '../../../interfaces/viewer-component.interface';
+import { ViewerComponent } from '../../../classes/viewer-component.class';
 
 @Component({
   selector: 'app-audio-viewer',

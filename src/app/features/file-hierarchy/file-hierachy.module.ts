@@ -12,6 +12,7 @@ import { FileNodeComponent } from './file-tree/file-node/file-node.component';
 import { FileTreeComponent } from './file-tree/file-tree.component';
 import { FileHierarchyService } from './services/file-hierarchy/file-hierarchy.service';
 import { InputDirectoryComponent } from './input-directory/input-directory.component';
+import { DefaultViewerComponent } from './file-preview/viewers/default-viewer/default-viewer.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { InputDirectoryComponent } from './input-directory/input-directory.compo
     VideoViewerComponent,
     AudioViewerComponent,
     FileDetailsComponent,
+    DefaultViewerComponent,
   ],
   imports: [CommonModule, NgxFilesizeModule, MaterialModule],
   exports: [FileTreeComponent, FilePreviewComponent, InputDirectoryComponent],
