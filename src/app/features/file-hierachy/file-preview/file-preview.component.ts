@@ -6,7 +6,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ViewerComponent } from 'src/app/core/interfaces/viewer-component.interface';
+import { ViewerComponent } from 'src/app/features/file-hierachy/interfaces/viewer-component.interface';
 import { FileHierarchyService } from '../services/file-hierarchy/file-hierarchy.service';
 import { ViewerComponentFactoryService } from './viewers/services/viewer-component-factory.service';
 

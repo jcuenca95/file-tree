@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { v4 } from 'uuid';
-import { TreeNode } from '../../../../core/interfaces/tree-node.interface';
+import { TreeNode } from '../../interfaces/tree-node.interface';
 
 export interface PlainNode extends Omit<TreeNode, 'children'> {
   parentId: TreeNode['id'] | undefined;

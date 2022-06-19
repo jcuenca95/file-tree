@@ -1,5 +1,5 @@
 import { Inject, Injectable, Type } from '@angular/core';
-import { ViewerComponent } from '../../../../../core/interfaces/viewer-component.interface';
+import { ViewerComponent } from '../../../interfaces/viewer-component.interface';
 import { ViewerComponentMap } from '../../../../../core/injection-tokens';
 
 @Injectable({
