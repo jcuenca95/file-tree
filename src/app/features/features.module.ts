@@ -9,6 +9,7 @@ import { ImageViewerComponent } from './file-preview/viewers/image-viewer/image-
 import { VideoViewerComponent } from './file-preview/viewers/video-viewer/video-viewer.component';
 import { AudioViewerComponent } from './file-preview/viewers/audio-viewer/audio-viewer.component';
 import { ViewerComponentMap } from '../core/injection-tokens';
+import { FileDetailsComponent } from './file-preview/file-details/file-details.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ViewerComponentMap } from '../core/injection-tokens';
     ImageViewerComponent,
     VideoViewerComponent,
     AudioViewerComponent,
+    FileDetailsComponent,
   ],
   imports: [CommonModule, MaterialModule],
   exports: [FileTreeComponent, FilePreviewComponent],

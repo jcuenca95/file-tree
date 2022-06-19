@@ -14,6 +14,6 @@ export class VideoViewerComponent
   private videoPlayer!: ElementRef<HTMLVideoElement>;
 
   ngAfterViewInit(): void {
-    this.videoPlayer.nativeElement.load();
+    this.videoPlayer?.nativeElement.load();
   }
 }

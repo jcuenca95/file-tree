@@ -1,1 +1,3 @@
-<p>audio-viewer works!</p>
+<audio #audioPlayer controls>
+  <source *ngIf="fileData$ | async as fileData" [src]="fileData" />
+</audio>

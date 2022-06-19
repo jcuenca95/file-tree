@@ -1,4 +1,1 @@
-<ng-container *ngIf="file">
-  <p>{{ file.name }}</p>
-  <img *ngIf="fileData$ | async as fileData" [src]="fileData" />
-</ng-container>
+<img *ngIf="fileData$ | async as fileData" [src]="fileData" />
