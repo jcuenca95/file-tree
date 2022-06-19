@@ -1,4 +1,3 @@
-<p [class]="'node ' + (selectedClass$ | async)" (click)="handleOnNodeClick()">
-  <mat-icon>{{ icon }}</mat-icon
-  >{{ node.name }}
+<p data-testid="file-node" [class]="'node ' + (selectedClass$ | async)" (click)="handleOnNodeClick()">
+  <mat-icon>{{ icon }}</mat-icon> {{ node.name }}
 </p>
