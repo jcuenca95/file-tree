@@ -6,6 +6,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { getExtensionFromFileName } from '../../../core/helpers/file.helpers';
 import { ViewerComponent } from '../classes/viewer-component.class';
 import { FileHierarchyService } from '../services/file-hierarchy/file-hierarchy.service';
 import { ViewerComponentFactoryService } from './viewers/services/viewer-component-factory.service';
@@ -37,8 +38,7 @@ export class FilePreviewComponent implements AfterContentInit, OnDestroy {
       if (this.viewerContainer) {
         this.viewerContainer.clear();
         if (file) {
-          const fileNameSplitted = file.name.split('.');
-          const fileExt = fileNameSplitted[fileNameSplitted.length - 1];
+          const fileExt = getExtensionFromFileName(file.name)
           const component = this.viewerComponentFactory.getComponent(fileExt);
           const viewerComponent =
             this.viewerContainer.createComponent<ViewerComponent>(

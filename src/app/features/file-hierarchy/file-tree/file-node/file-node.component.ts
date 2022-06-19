@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
+import { getExtensionFromFileName } from '../../../../core/helpers/file.helpers';
 import { getIconFromExt } from '../../../../core/helpers/file-icons.helper';
 import {
   FileHierarchyService,
@@ -29,8 +30,7 @@ export class FileNodeComponent implements OnInit {
     if (this.node.type === 'folder') {
       return this.node.isOpen ? 'folder_open' : 'folder';
     }
-    const splittedFilename = this.node.name.split('.');
-    return getIconFromExt(splittedFilename[splittedFilename.length - 1]);
+    return getIconFromExt(getExtensionFromFileName(this.node.name));
   }
 
   handleOnNodeClick() {

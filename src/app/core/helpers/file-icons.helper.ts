@@ -7,5 +7,5 @@ const FileIconMap: Record<string, string> = {
 };
 
 export function getIconFromExt(ext: string) {
-  return FileIconMap[ext];
+  return FileIconMap[ext] || 'description';
 }
