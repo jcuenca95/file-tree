@@ -1,0 +1,9 @@
+@import '../../../styles.scss';
+.empty-preview {
+    border-radius: 4px;
+    border: 4px $accent dashed;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

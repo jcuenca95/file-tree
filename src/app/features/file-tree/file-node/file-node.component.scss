@@ -1,3 +1,5 @@
+@import '../../../../styles.scss';
+
 .node {
     display: flex;
     align-items: flex-end;
@@ -7,6 +9,6 @@
 }
 
 .node.selected {
-    background-color: #673ab710;
+    background-color: $accent;
     border-radius: 4px;
 }

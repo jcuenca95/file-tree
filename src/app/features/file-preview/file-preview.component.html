@@ -1,3 +1,7 @@
 <ng-container #viewer></ng-container>
 <file-details *ngIf="file" [file]="file"></file-details>
-<p *ngIf="!file">No file selected</p>
+<ng-container *ngIf="!file">
+  <div class="empty-preview">
+    <p>No file selected</p>
+  </div>
+</ng-container>
