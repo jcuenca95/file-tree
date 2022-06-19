@@ -5,9 +5,6 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './file-details.component.html',
   styleUrls: ['./file-details.component.scss'],
 })
-export class FileDetailsComponent implements OnInit {
+export class FileDetailsComponent {
   @Input() file!: File;
-  constructor() {}
-
-  ngOnInit(): void {}
 }

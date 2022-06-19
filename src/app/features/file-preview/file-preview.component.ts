@@ -39,16 +39,14 @@ export class FilePreviewComponent implements AfterContentInit, OnDestroy {
       if (this.viewerContainer) {
         this.viewerContainer.clear();
         if (file) {
-          if (file) {
-            const fileNameSplitted = file.name.split('.');
-            const fileExt = fileNameSplitted[fileNameSplitted.length - 1];
-            const component = this.viewerComponentFactory.getComponent(fileExt);
-            const viewerComponent =
-              this.viewerContainer.createComponent<ViewerComponent>(
-                component as any
-              );
-            viewerComponent.instance.file = file;
-          }
+          const fileNameSplitted = file.name.split('.');
+          const fileExt = fileNameSplitted[fileNameSplitted.length - 1];
+          const component = this.viewerComponentFactory.getComponent(fileExt);
+          const viewerComponent =
+            this.viewerContainer.createComponent<ViewerComponent>(
+              component as any
+            );
+          viewerComponent.instance.file = file;
         }
       }
     });

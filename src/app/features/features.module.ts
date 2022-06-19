@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgxFilesizeModule } from 'ngx-filesize';
 import { FileTreeComponent } from './file-tree/file-tree.component';
 import { FilePreviewComponent } from './file-preview/file-preview.component';
 import { MaterialModule } from '../material/material.module';
@@ -21,7 +22,7 @@ import { FileDetailsComponent } from './file-preview/file-details/file-details.c
     AudioViewerComponent,
     FileDetailsComponent,
   ],
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, NgxFilesizeModule],
   exports: [FileTreeComponent, FilePreviewComponent],
   providers: [
     FileHierarchyService,
