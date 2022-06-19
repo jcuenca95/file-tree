@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ViewerComponent } from 'src/app/core/interfaces/viewer-component.interface';
+import { Component } from '@angular/core';
+import { ViewerComponent } from '../../../../../core/interfaces/viewer-component.interface';
 
 @Component({
   selector: 'app-image-viewer',

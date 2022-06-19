@@ -1,8 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import {
-  FileHierarchyService,
-  PlainNode,
-} from '../../../features/services/file-hierarchy/file-hierarchy.service';
+import { FileHierarchyService } from '../services/file-hierarchy/file-hierarchy.service';
 
 @Component({
   selector: 'input-directory',

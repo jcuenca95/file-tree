@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { ViewerComponent } from '../../../../core/interfaces/viewer-component.interface';
+import { ViewerComponent } from '../../../../../core/interfaces/viewer-component.interface';
 
 @Component({
   selector: 'app-video-viewer',

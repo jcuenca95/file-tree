@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
-import { getIconFromExt } from 'src/app/core/helpers/file-icons.helper';
+import { getIconFromExt } from '../../../../core/helpers/file-icons.helper';
 import {
   FileHierarchyService,
   PlainNode,

@@ -6,10 +6,9 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FeaturesModule } from './features/features.module';
 import { MaterialModule } from './material/material.module';
-import { InputDirectoryComponent } from './components/header/input-directory/input-directory.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, InputDirectoryComponent],
+  declarations: [AppComponent, HeaderComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

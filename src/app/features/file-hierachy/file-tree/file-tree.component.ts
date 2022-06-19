@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { TreeNode } from 'src/app/core/interfaces/tree-node.interface';
+import { TreeNode } from '../../../core/interfaces/tree-node.interface';
 import {
   PlainNode,
   FileHierarchyService,
