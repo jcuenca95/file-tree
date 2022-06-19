@@ -27,7 +27,7 @@ export class FileNodeComponent implements OnInit {
 
   get icon() {
     if (this.node.type === 'folder') {
-      return 'folder';
+      return this.node.isOpen ? 'folder_open' : 'folder';
     }
     const splittedFilename = this.node.name.split('.');
     return getIconFromExt(splittedFilename[splittedFilename.length - 1]);

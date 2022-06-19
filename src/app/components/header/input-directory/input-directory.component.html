@@ -1,4 +1,5 @@
-<label for="fileList">Select folder to inspect</label>
+<label for="filepicker"> Select folder to inspect </label>
+<button mat-raised-button (click)="raiseInputFile()">Import</button>
 <input
   type="file"
   id="filepicker"
@@ -6,4 +7,5 @@
   webkitdirectory
   multiple
   (change)="handleOnChangeInput($event)"
+  #inputFile
 />

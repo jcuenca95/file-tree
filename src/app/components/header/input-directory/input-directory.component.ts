@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   FileHierarchyService,
   PlainNode,
@@ -9,10 +9,10 @@ import {
   templateUrl: './input-directory.component.html',
   styleUrls: ['./input-directory.component.scss'],
 })
-export class InputDirectoryComponent implements OnInit {
-  constructor(private fileHierarchyService: FileHierarchyService) {}
+export class InputDirectoryComponent {
+  @ViewChild('inputFile', {read: ElementRef<HTMLInputElement>}) private inputFile!: ElementRef<HTMLInputElement>
 
-  ngOnInit(): void {}
+  constructor(private fileHierarchyService: FileHierarchyService) {}
 
   handleOnChangeInput(event: any) {
     const files: File[] = [];
@@ -21,5 +21,9 @@ export class InputDirectoryComponent implements OnInit {
       files.push(file);
     }
     this.fileHierarchyService.loadTree(files);
+  }
+
+  raiseInputFile() {
+    this.inputFile.nativeElement.click()
   }
 }
