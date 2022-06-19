@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgxFilesizeModule } from 'ngx-filesize';
 
 import { FileDetailsComponent } from './file-details.component';
 
@@ -8,12 +9,14 @@ describe('FileDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FileDetailsComponent ]
+      declarations: [ FileDetailsComponent ],
+      imports: [NgxFilesizeModule]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(FileDetailsComponent);
     component = fixture.componentInstance;
+    component.file = new File([], 'x.jpg');
     fixture.detectChanges();
   });
 
