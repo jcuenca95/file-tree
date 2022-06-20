@@ -18,7 +18,7 @@ export class FileHierarchyService {
   );
   private loadedFiles: File[] = [];
 
-  constructor() {}
+  constructor() { }
 
   get hierarchy$(): Observable<PlainNode[]> {
     return this._hierarchy$.asObservable();
@@ -39,30 +39,30 @@ export class FileHierarchyService {
     );
   }
 
-  createTreeFromPath(
+  private createTreeFromPath(
     path: string[],
     hierarchy: PlainNode[] = [],
     parentId: TreeNode['id'] | undefined = undefined
   ): PlainNode[] {
-    if (path.length === 0) {
-      return hierarchy;
-    }
     const nodeName = path[0];
-    const fileRef = this.loadedFiles.find((file) => file.name === nodeName);
+    const isFile = path.length === 1
     const nodeRef = hierarchy.find((node) => node.name === nodeName);
     const id = nodeRef ? nodeRef.id : v4();
     if (!nodeRef) {
       hierarchy.push({
         isOpen: false,
         name: nodeName,
-        type: fileRef ? 'file' : 'folder',
+        type: isFile ? 'file' : 'folder',
         parentId: parentId,
         id,
       });
     }
     path.shift();
+    if (path.length === 0) {
+      return hierarchy
+    }
     this.createTreeFromPath(path, hierarchy, id);
-    return hierarchy;
+    return hierarchy
   }
 
   loadTree(files: File[]): void {
@@ -91,7 +91,7 @@ export class FileHierarchyService {
     );
   }
 
-  getChildren(parentId: TreeNode['id'] | undefined): Observable<PlainNode[]> {
+  getChildren(parentId?: TreeNode['id'] | undefined): Observable<PlainNode[]> {
     return this._hierarchy$.pipe(
       map((hierarchy) =>
         hierarchy.filter((element) => element.parentId === parentId)
